@@ -7,7 +7,7 @@ blog({
   description: "Welcome to my JavaScript adventures.",
    //header: <header>Creative JavaScript</header>,
    //section: <section>Your custom section</section>,
-   footer: <footer>Thomas P</footer>,
+   //footer: <footer>Thomas P</footer>,
   avatar: "images/rainbow-road.jpg",
   avatarClass: "rounded-full",
   author: "Petridis Tom",

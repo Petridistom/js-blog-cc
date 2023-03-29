@@ -128,8 +128,45 @@ I have taken this code and implemented a new function called portal(), that send
 
 <iframe width = 576 height = 366 src="https://editor.p5js.org/Petridistom/full/5Rv-iF7yz"></iframe>
 
+```Javascript
+  //define a function called portal
+  portal() {
+    
+    
+    //check if the circles have crossed the left edge of the canvas.
+    if (this.position.x < 0) {
+      
+    //if so send them to the right edge.
+    this.position.x = width;
+  } 
+    
+    
+    //otherwise, check if the circles have crossed the right edge of the canvas.
+    else if (this.position.x > width) {
+      
+    //if so, send them to the left edge.
+    this.position.x = 0;
+  }
+    
+    
+    //check if the circles have crossed the bottom edge. 
+    if (this.position.y > height) {
+    
+      //if so, send the circle to y = 20. 
+      //sending them to the arbitrary y = 20 stops some glitching.
+      this.position.y = 20;
+    }
+    
+    //check if the circles have crossed the top edge.
+    if (this.position.y < 0) {
+    
+      //if so, send the circles to the bottom of the screen
+      this.position.y += height
+    }
+    
+  } 
+```
+
 ---
 
 As it is right now, this code is not easily repeatable, if I want to add a second object or more I have to create repeated variables and write repeated sections of code for each new object that I want to display. In the next blog post I will be adapting this code into an object class and making it repeatable for my convenience.
-
----
