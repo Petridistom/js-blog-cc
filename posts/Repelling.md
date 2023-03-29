@@ -131,3 +131,5 @@ I have taken this code and implemented a new function called portal(), that send
 ---
 
 As it is right now, this code is not easily repeatable, if I want to add a second object or more I have to create repeated variables and write repeated sections of code for each new object that I want to display. In the next blog post I will be adapting this code into an object class and making it repeatable for my convenience.
+
+---
