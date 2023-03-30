@@ -129,4 +129,4 @@ circle2 = new Circle (width*2 /3, height /2, 100);
   circle2.portal();
  ```
 
-With this method I still have some repeating code. For the next blog post, I will look at how to add the circles into an array and how to call each function to each circle by just calling them once
+With this method I still have some repeating code. For the next blog post, I will look at how to add the circles into an array and how to call each function to each circle by just calling them once.
