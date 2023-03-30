@@ -1,17 +1,17 @@
 ---
-title: OOP
+title: Object oriented programming
 publish_date: 2023-03-15
 disable_html_sanitization: true
 ---
 
-###### From now on, instead of refering to 'objects', I will be calling them circles because that is what the objects will be. ######
+###### From now on, instead of refering to 'objects', I will be calling them circles because that is what the objects will be in the final design. ######
 
 ---
 
-In order to be able to display as many circles as I want on the screen and have each of them be their own
-entity that interacts with the mouse, I define the circles outside of the main sketch.js file in a new file called Circle.js and create a new object class named Circle. I use this new class to construct the properties of each circle that we will be doing the math to, and then following them with the functions I want to call to each circle to make them move and such.
+In order to be able to display as many circles as I want on the screen and have each be their own
+entity that interacts with the mouse, I define their properties outside of the main sketch.js file in a new file called Circle.js and create a new object class named Circle. I use this new class to construct the properties of each circle that I will be doing the math to, and then following with the functions that do the math.
 
-###### This [blog](http://thomas.capogre.co/rmit/ccs/2022/09/06/classes.html) post written by my teacher was useful for understanding this concept and applying to my own code. ######
+###### This [blog](http://thomas.capogre.co/rmit/ccs/2022/09/06/classes.html) post written by my teacher was useful for understanding this concept and applying object oriented programming to my code. ######
 
 I create the constructor as follows:
 ```Javascript
@@ -55,12 +55,15 @@ I create the constructor as follows:
   } 
 ```
 
-The variables `position`, `velocity`, `acceleration`, `maxDistEffect,` `maxForce` and `dampening` have been moved into the constructor and given the prefix 'this.' so that they are recognised locally inside of the class. I have also added new variables `this.circlesize` and `this.yspeed` so that I can have circles of varying size and moving upwards at varying speed. The constructor also has input parameters **posx**, **posy** and **size**, these inputs allow each circle to be initialised with varying positions and sizes on the screen, determined from inside the sketch.js file.
+The variables `position`, `velocity`, `acceleration`, `maxDistEffect,` `maxForce` and `dampening` have been moved into the constructor and given the prefix 'this.' so that they are recognised locally inside of the class for when using them in the functions. I have also added new variables `this.circlesize` and `this.yspeed` so that I can have circles of varying size and moving upwards at varying speed. The constructor also has input parameters **posx**, **posy** and **size**, these inputs allow each circle to be initialised with varying positions and sizes on the screen, determined from inside the sketch.js file.
 
 ---
 
-With the variables moved into the Circle.js file, I can now copy over our code that updates the positon of each circle and put it into separate defined functions that I can later call inside the sketch.js file.
-###### In order for things to work the Circle.js file needs to be linked to the html file in the p5 sketch. You can do this by typing `<script src=Circle.js></script>` in the body section of the html file.
+With the variables moved into the Circle.js file, I can now copy over the code that updates the position of each circle and puts it into separate defined functions that I can later call inside the sketch.js file.
+
+###### In order for things to work, the Circle.js file needs to be linked to the html file in the p5 sketch. Typing `<script src=Circle.js></script>` in the body section of the html, links Circle.js file.
+
+---
 
 I define new functions:
 
@@ -89,9 +92,9 @@ portal() {
 ...
 }
 ```
-###### The repel and portal functions are too large to show and can be found behind the embedded p5 sketch below inside the Circle.js file.
+###### The repel and portal functions are too large to show and can be found behind the embedded p5 sketch below, inside the Circle.js file.
 
-It is important when copying over our code that we rename every variable to the local version by adding **this.** infront of them, otherwise things will not work. 
+It is important when copying over the code that every variable is renamed to the local version by adding **this.** infront of them, otherwise things will not work. 
 
 ---
 
@@ -99,18 +102,18 @@ Now that I have adapted the code into an object class, I have written Object Ori
 
 
 
-In the following example I draw two separate circles that can interact with the mouse.
+In the following example I draw two separate circles using the class object method. Each can seperately interact with the mouse.
 
 <iframe width = 576 height = 366 src="https://editor.p5js.org/Petridistom/full/SfTV0PWAJ"></iframe>
 
-I draw each object to the screen by defining a new variable inside the setup() function, `circle1` and `circle2` for each and set this variable equal to a new Circle with my own starting values for the **posx**, **posy** and **size** parameters. ie 
+I draw each circle to the screen by defining a new variable inside the setup( ) function, `circle1` and `circle2` for each and set this variable equal to a new **Circle** with my own starting values for the **posx**, **posy** and **size** parameters. ie 
 
 ```Javascript
 circle1 = new Circle (width /3, height /2, 100);
 
 circle2 = new Circle (width*2 /3, height /2, 100);
 ```
- Then inside the draw() function, I call to each circle all of the functions that I defined inside the Circle class, so that the circles can move and such. ie
+ Then inside the draw( ) function, I call to each circle, the functions that are defined inside the Circle class.
 
  ```Javascript
   circle1.display();
@@ -126,4 +129,4 @@ circle2 = new Circle (width*2 /3, height /2, 100);
   circle2.portal();
  ```
 
-With this method I still have some repeating code that I want to simplify, so for the next blog post, I will look at how to add the circles into an array with as many of my choosing and how to call each function to each circle by just typing them out once.
+With this method I still have some repeating code. For the next blog post, I will look at how to add the circles into an array and how to call each function to each circle by just calling them once
