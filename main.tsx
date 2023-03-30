@@ -4,7 +4,7 @@ import blog, { ga, redirects, h } from "blog";
 
 blog({
   title: "Thomas' Blog",
-  description: "Welcome to my JavaScript adventures.",
+  description: "Documenting my JavaScript projects",
    //header: <header>Creative JavaScript</header>,
    //section: <section>Your custom section</section>,
    //footer: <footer>Thomas P</footer>,
