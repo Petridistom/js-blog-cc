@@ -25,10 +25,10 @@ function recursive_square(x, y, s) {
   }
 }
 ```
-At the end, this function calls itself, making it a recursive function. But I do not want this to happen infinitely. Using a conditional if statement, I can write the function an end clause. This means that the recursive code inside the function will only run if the condition s > 2 is true. 
+At the end, this function calls itself, making it a recursive function. But I do not want this to happen infinitely. Using a conditional if statement, I can write the function an end clause. This means that the code inside the function that calls itself, will only run if the condition s > 2 is true. 
 ```JavaScript 
 if (s > 2) {
-
+    recursive_square(x + s *0.5, y + s*0.5, s *0.5);
 }
 ```
  In the code that calls the function again, the value of `s` has math done to it to make it approach the end clause, so that eventually it will be less than 2 and the recursion will stop.
