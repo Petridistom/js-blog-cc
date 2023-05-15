@@ -53,7 +53,7 @@ function recursive_square(x, y, s) {
   square(x, y, s)
   
   // end clause
-  if (s > 15) {
+  if (s > 16) {
     recursive_square(x + s *0.5, y + s*0.5, s *0.5);
     recursive_square(x - s *0.5, y + s*0.5, s *0.5);
     recursive_square(x - s *0.5, y - s*0.5, s *0.5);
@@ -65,13 +65,12 @@ function recursive_square(x, y, s) {
 
 ---
 
-To add detail, I want the recursive nature of the square to animate a bit, so that it moves around like a body of water does. 
-To do this I randomise the end clause value for s between values 8 and 16. The result is this;
+To refine the detail, I add a new argument to the function allowing me to give each little square a length as well as a width, so that they can be drawn as rectangles and look a bit smoother. 
+To do this I add `l` to the parameters, and set it to 4.
 ```JavaScript
 function setup() {
   createCanvas(576, 324)
   rectMode(CENTER)
-  frameRate(7.5)
 }
 
 function draw() {
@@ -79,22 +78,80 @@ function draw() {
   
   stroke('deeppink')
   noFill()
-  recursive_square(width/2, height/2, 100)
+  recursive_square(width/2, height/2, 100, 4)
 }
 
-// define recursive square function
-function recursive_square(x, y, s) {
-  square(x, y, s)
+function recursive_square(x, y, s, l) { // designs the squares that
+                                        // display at the bottom
   
-  // end clause
-  if (s > random(8,16)) {
-    recursive_square(x + s *0.5, y + s*0.5, s *0.5);
-    recursive_square(x - s *0.5, y + s*0.5, s *0.5);
-    recursive_square(x - s *0.5, y - s*0.5, s *0.5);
-    recursive_square(x + s *0.5, y - s*0.5, s *0.5);    
+  // draw a rectangle with
+  // given parameters
+  rect(x, y, s, l)
+  
+  // state an end clause for
+  // recursion in next code
+  if (s > 16) {
+    
+    // draw a recursive
+    // style square
+    recursive_square(x + s *0.5, y + s*0.5, s *0.5, l);
+    recursive_square(x - s *0.5, y + s*0.5, s *0.5, l);
+    recursive_square(x - s *0.5, y - s*0.5, s *0.5, l);
+    recursive_square(x + s *0.5, y - s*0.5, s *0.5, l);    
   }
 }
 ```
 <iframe width = 576 height = 366 src="https://editor.p5js.org/Petridistom/full/SbyLPhPaK"></iframe>
 
-###### Note: I have reduced the frame rate of the render to slow down the animation ######
+The last thing I need to do is write a short looping function that draws this design across the bottom edge of the screen. 
+
+```Javascript
+function setup() {
+  createCanvas(576, 324)
+  rectMode(CENTER)
+}
+
+function draw() {
+  background(0)
+  
+  stroke('deeppink')
+  noFill()
+  draw_RS()
+}
+
+function recursive_square(x, y, s, l) { // designs the squares that
+                                        // display at the bottom
+  
+  // draw a rectangle with
+  // given parameters
+  rect(x, y, s, l)
+  
+  // state an end clause for
+  // recursion in next code
+  if (s > 16) {
+    
+    // draw a recursive
+    // style square
+    recursive_square(x + s *0.5, y + s*0.5, s *0.5, l);
+    recursive_square(x - s *0.5, y + s*0.5, s *0.5, l);
+    recursive_square(x - s *0.5, y - s*0.5, s *0.5, l);
+    recursive_square(x + s *0.5, y - s*0.5, s *0.5, l);    
+  }
+}
+
+function draw_RS() { // displays the squares at
+                     // the bottom of the screen
+  
+  // call the function 
+  // recursive_squares at
+  // each posx along
+  //the bottom of the screen
+  for (let posx = -150; posx < width +150; posx += 150) {
+    
+      // draws the recursive squares 
+      recursive_square(posx, height, 150, 4)
+  }
+}
+```
+
+<iframe width = 576 height = 366 src="https://editor.p5js.org/Petridistom/full/mC_Dt_Ajq"></iframe>
