@@ -4,6 +4,8 @@ publish_date: 2023-04-24
 disable_html_sanitization: true
 ---
 
+### Breaking away from p5 ###
+
 I am now breaking away from p5 training wheels and I'm starting to write my script in vanilla JavaScript. Part of this process is to learn how to use the canvas API for generating a canvas like the setup ( ) function does in p5. Then redefining the draw ( ) function and using `requestAnimationFrame` to have the draw function call itself recursively. I will be getting into recursion more in a later post, as it is going to be important for my next project. This post is focusing on creating a workflow for drawing to a canvas in vanilla JavaScript, by following a tutorial as an example.
 
 ---
