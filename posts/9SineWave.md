@@ -5,7 +5,7 @@ disable_html_sanitization: true
 ---
 ### Sine Waves as Diameter ###
 
-For my community of practice, I will generating a breathing ball visual for us to synchronise our breathing with, for meditation. I have chosen my community of practice to be the yoga sessions I sometimes do together with my girlfriend. This breathing Ball wll help us match our breathing cycles together and keep us in the same rythm while we practice together. 
+For my community of practice, I will be generating a breathing ball visual for me and my girlfriend to synchronise our breathing with, for meditation. I have chosen my community of practice to be the yoga sessions I sometimes do together with my girlfriend. This breathing ball wll help us sync our breathing cycles together and keep us in the same rythm while we practice yoga. 
 
 To begin, I delcare a `sig` variable for replacing the diameter argument when drawing a circle ( ) in p5. 
 
@@ -14,154 +14,73 @@ In the draw function;
 let sig = sin (frameCount * TWO_PI / 360)
 ```
 
----
+`sin (frameCount * TWO_PI / 360)` returns a value between -1 and 1. That is incremented by time (frameCount),and by a factor of TWO_PI / 360. This makes the value of sig move back and forth between -1 and 1, (around the unit circle) as the frameCount goes up. This is what makes the circle breath. 
 
-I construct the sand with parameters `x` `y` `s` in a separate Sand.js file and set them to this.variables for the functions defined below, with new variables this.r and this.d for transformations later.
+`frameCount * TWO_PI` is the amplitude for the wave, and `360` is the period. 
 
-```Javascript
-class Sand {
-  // define properties
-  // of each granule
-  constructor (x, y, s) {
-    this.x = x;
-    this.y = y;
-    this.s = s;
-    this.d = 0;
-    this.r = 0;
-  }
-```
-
-A simple display( ) function is all that is necessary to draw each particle.
-
-```Javascript
-display() {
-    // stye and draw
-    // each granule
-    noStroke()
-    fill(255)
-    rect(this.x, this.y, this.s, this.s)
-  }
-```
-At this point, in the sketch.js file, I set up an empty granules = [ ] array to hold the sand particles, and set a `maxLength` variable equal to 100, to determine the maximum amount of sand granules that can be displayed at once. 
-
-```Javascript
-// assign empty array to `granules`
-let granules = [];
-
-// set max amount of sand
-const maxLength = 100;
-```
-
-Outside of the draw function, I define a new function called spawnSand( ), that has all of its code nested in an if statement, if (mouseIsPressed) { }. This means that the code inside the spawnSand fuction only runs when the mouse is being held down. 
-
-If the mouse is being pressed, then I want a new Sand object to be created at the mouse position, 2 pixels large and stored in the granules array. As follows;
-
-```Javascript
-if (granules.length < maxLength) {
-      // make a new sand granule,
-      // & add it to the 'granules' array
-      granules.push (new Sand (mouseX, mouseY, 2))
-    }
-  }
-```
-Below, I check the length of the granules array to see if it has reached the max value, and then execute .shift( ) to remove older Sand objects. 
-
-```Javascript
-// removes older granules so
-  // new ones can spawn
-  if (granules.length === maxLength) {
-    granules.shift()
-  }
-```
-
-The last thing to do for inside the spawnSand( ) function is to iterate over each granule array item and run the functions from the Sand class object. As follows;
-
-```Javascript
-    // use the .forEach () array method
-    // to pass each granule, one at a time,
-    // as an argument into the g function
-    granules.forEach ((g) => {
-      
-    // run functions from
-    // sand class object
-    g.display ()
-    // g.move ()
-  })
-```
-
-###### the g.move( ) function is coded out for now until I write it later on in this post. ######
-
-Using the .forEach( ) method to access each granule in the array, and an arrow function defined to run the Sand object's functions, for each Sand object in granules.
+Because the frameRate of the canvas is set to 24 frames per second. The period `360` divided by the frameRate `24` gives `(360 / 24) = 15` seconds per trip aroud the unit circle. Making one breathing cycle last 15 seconds long.
 
 ---
 
-With all this, I call the spawnSand( ) function inside the draw( ) function, to have it run once every frame, giving the following results;
+At this point if we use `sig` as the diameter of the circle, its size will only range from -1 to 1. I want to affect this range so that the circle can start and finish at larger values. 
 
-<iframe width = 576 height = 366 src="https://editor.p5js.org/Petridistom/full/6QonEB9Ya"></iframe>
+In the code;
+
+```javascript
+// incrementing the vale of sig will change its range
+
+// increment by 1
+sig += 1   // gives [ 0 , 2 ]
+
+// multiply by 100
+sig *= 100 // gives [ 0 , 200 ]
+
+// increment by 10
+sig += 10  // gives [ 10 , 210 ]
+```
+This means that the circles size will now range from 10 to 210 instead of -1 to 1
 
 ---
 
-To get the particles acting like real sand, I define a new constructor function inside the Sand class object.  A move( ) function that first generates a random number from 0 to 1, and then checks that number in conditional statements to see on each frame which transformation to make to a single granule. 
+So, now when I draw a circle with sig as the diameter, we get this animation.
 
-Start with;
+Here is an example where the range has been edited to [ 10, 210 ]
 
-```Javascript
-move() {
+```javascript
+function setup() {
+
+  // create a canvas 576 by 324 pixels
+  createCanvas(576, 324);
+  
+  // removes stroke
+  noStroke ()
+  
+  // set the frameRate to 24 fps
+  frameRate (24)
+}
+
+function draw() {
+  
+  // set the background black
+  background(0);
+  
+  // set a variable `sig` to the sin of frameCount * 2PI / 360
+  let sig = sin (frameCount * TWO_PI / 360) // [ 0, 1 ]
+  // (360 / 24 fps) = 15s seconds per breath cycle
+  
+  // incriment sig to affect its range
+  sig += 1   // [ 000 , 002]
+  sig *= 100 // [ 000 , 200]
+  sig += 10  // [ 010 , 210]
     
-    // get random decimal
-    this.r = random(1)
-    
-    // 50 percent chance 
-    // transformation 1 runs
-    if (this.r > 0.5){
-
-    }
-    
-    // 50 percent chance 
-    // transformation 2 runs
-    if (this.r < 0.5) {
-
-    }
-  }
+  // set fill to deeppink
+  fill('deeppink')
+  
+  // draw a circle at the center of the screen
+  // with diameter of `sig`
+  ellipse ( width / 2, height / 2, sig)
 }
 ```
+<iframe width = 576 height = 366 src="https://editor.p5js.org/Petridistom/full/2w5pFqYp4"></iframe>
 
-The above move ( ) function has two different ways to run, and either way has a 50% of running per frame, one at a time. 
-
-I fill in the if statements with transformation code to make the particles move. 
-
-```Javascript
-move() {
-    
-    // get random decimal
-    this.r = random(1)
-    
-    // 50 percent chance 
-    // transformation 1 runs
-    if (this.r > 0.5){
-      //1 
-      if (0 <= this.d && this.d <= 10) {
-        this.x += random(-2,2);
-        this.d ++
-      }
-      if (this.d >= 10) {
-        this.d = 0
-      }
-    }
-    
-    // 50 percent chance transformation
-    // 2 runs
-    if (this.r < 0.5) {
-      //2
-      this.y += 3
-    }
-  }
-```
-
-Transformation 1, will do 1 of 2 things depending on the value of `this.d`. Starting at `this.d = 0`, `this.x` is updated by a random value between -2 and 2, so that the particles move side to side a bit while falling.  Once `this.d` = 10, it is reset back to zero.
-
-Transformation 2, will increase the `this.y` value of the particles by 3 pixels, each time it runs, making them flow down the page.
-
-After uncommmenting the g.move( ) line in the sketch.js file, I get the following result;
-
-<iframe width = 576 height = 366 src="https://editor.p5js.org/Petridistom/full/Jtxe5Oy0A"></iframe>
+###### Note: The code for this example was written for and taught to me by my teacher [Thomas Capogreco](https://thomas.capogre.co/). ######
