@@ -44,8 +44,6 @@ This means that the circles size will now range from 10 to 210 instead of -1 to 
 
 So, now when I draw a circle with sig as the diameter, we get this animation.
 
-Here is an example where the range has been edited to [ 10, 210 ]
-
 ```javascript
 function setup() {
 
