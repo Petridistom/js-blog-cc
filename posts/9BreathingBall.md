@@ -27,7 +27,7 @@ At this point if we use `sig` as the diameter of the circle, its size will only 
 In the code;
 
 ```javascript
-// incrementing the vale of sig will change its range
+// incrementing the value of sig will change its range
 
 // increment by 1
 sig += 1   // gives [ 0 , 2 ]
