@@ -1,6 +1,6 @@
 ---
 title: Recursive Net Art
-publish_date: 2023-05-2
+publish_date: 2023-05-02
 disable_html_sanitization: true
 ---
 
