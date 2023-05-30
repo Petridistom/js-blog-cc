@@ -81,4 +81,4 @@ function draw() {
 ```
 <iframe width = 576 height = 366 src="https://editor.p5js.org/Petridistom/full/2w5pFqYp4"></iframe>
 
-###### Note: The code for this example was written for and taught to me by my teacher [Thomas Capogreco](https://thomas.capogre.co/). ######
+###### Note: The code for this example was written by and taught to me by my teacher [Thomas Capogreco](https://thomas.capogre.co/). ######
